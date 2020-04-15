@@ -20,24 +20,26 @@ const App = (props) => {
   }
 
   return (
-    <div>
-      <h1>Status Próximos a você:</h1>
-      <table>
+    <div className='bg-pink-800 p-2 rounded text-left max-w-lg mx-auto my-12 object-contain'>
+        <h1 className='font-bold text-white'>Bem-vindo, {props.user.name}</h1>
         {props.checkins.map(checkin => {
           return (
-            <tr>
-              <td>{checkin.id === props.user.sub && 'Seu status'}</td>
-              <td>{checkin.status}</td>
-              <td>{JSON.stringify(checkin.coords)}</td>
-              <td>{checkin.distance}</td>
-            </tr>
+            <div className='text-white p-5 text-left max-w-lg mx-auto my-4 object-contain border-b'>
+              <p className='text-white font-bold text-lg'>{checkin.id === props.user.sub && 'Seu status:'}</p><br/>
+              <p className='text-white font-bold'>{checkin.status}<br/></p>
+              <p className='leading-snug'>
+              Latitude:{JSON.stringify(checkin.coords.lat)}<br/>
+              Longitude:{JSON.stringify(checkin.coords.long)}
+              </p>
+              Distancia:{checkin.distance}
+            </div>
           )
         })}
-  
-      </table>
     </div>
   );
 };
+
+
 
 export default App;
 
@@ -47,7 +49,7 @@ export async function getServerSideProps({ req, res }) {
   console.log(session);
   if (session) {
     const today = new Date();
-    const currentDate = today.getFullYear() + '-' + today.getMonth()+ '-' + today.getDate();
+    const currentDate = today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate();
     const todaysCheckin = await db
       .collection('markers')
       .doc(currentDate)
@@ -63,14 +65,14 @@ export async function getServerSideProps({ req, res }) {
       //pode ver os outros checkins
       forceCreate = false;
       const checkins = await db.
-      collection('markers')
-      .doc(currentDate)
-      .collection('checks')
-      .near({
-        center: todaysData.coordinates,
-        radius: 1000
-      })
-      .get();
+        collection('markers')
+        .doc(currentDate)
+        .collection('checks')
+        .near({
+          center: todaysData.coordinates,
+          radius: 1000
+        })
+        .get();
 
       const checkinsList = [];
 
@@ -78,15 +80,15 @@ export async function getServerSideProps({ req, res }) {
         checkinsList.push({
           id: doc.id,
           status: doc.data().status,
-          coords:{
+          coords: {
             lat: doc.data().coordinates.latitude,
             long: doc.data().coordinates.longitude
           },
           distance: distance(
-          todaysData.coordinates.latitude, 
-          todaysData.coordinates.longitude, 
-          doc.data().coordinates.latitude,
-          doc.data().coordinates.longitude
+            todaysData.coordinates.latitude,
+            todaysData.coordinates.longitude,
+            doc.data().coordinates.latitude,
+            doc.data().coordinates.longitude
           ).toFixed(2)
         });
       });

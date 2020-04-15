@@ -19,7 +19,7 @@ const CreateStatus = () => {
           return {
             //pega tudo que já tava na variável dados
             ...old,
-            coords:{
+            coords: {
               lat: position.coords.latitude,
               long: position.coords.longitude,
             }
@@ -40,30 +40,46 @@ const CreateStatus = () => {
     });
   };
 
-  const save = async() => {
+  const save = async () => {
     await axios.post('/api/save-status', dados);
+    /*
+    useEffect(() => {
+      if (!props.isAuth) {
+        router.push('/');
+      } else if (props.forceCreate) {
+        router.push('/create-status');
+      }
+    });
+    */
   };
 
 
   return (
-    <div>
-      <h1>Create Status</h1>
-      
-      <label className='block'>
-        <input type='radio' name='status' value='bem' onClick={onStatusChange}/>Estou bem e sem sintomas.
-      </label>
-      
-      <label className='block'>
-        <input type='radio' name='status' value='gripe' onClick={onStatusChange}/>Estou com sintomas de gripe / resfriado.
-      </label>
-      
-      <label className='block'>
-        <input type='radio' name='status' value='covid' onClick={onStatusChange}/>Estou com sintomas de COVID.
+    <div className='p-5 rounded text-left max-w-lg mx-auto my-16 object-contain'>
+      <h1 className='text-center font-bold text-lg'>Create Status</h1>
+
+      <div className='ml-16 my-4'>
+
+        <label className='block'>
+          <input type='radio' name='status' value='Bem' onClick={onStatusChange} />Estou bem e sem sintomas.
       </label>
 
-      Sua posição atual: {JSON.stringify(dados)}
-      <button onClick={getMyLocation}>Pegar minha localização</button>
-      <button onClick={save}>Salvar meu status</button>
+        <label className='block'>
+          <input type='radio' name='status' value='Gripe' onClick={onStatusChange} />Estou com sintomas de gripe / resfriado.
+      </label>
+
+        <label className='block'>
+          <input type='radio' name='status' value='Covid' onClick={onStatusChange} />Estou com sintomas de COVID.
+      </label>
+        <p className='my-8'>
+          Sua posição atual: <br/>
+          Latitude: {JSON.stringify(dados.coords.lat)} <br/> 
+          Longitude: {JSON.stringify(dados.coords.long)} 
+        </p>
+      </div>
+      <button className='my-2 p-3 rounded bg-pink-800 font-bold shadow-xl hover:shadow block w-3/4 text-center mx-auto text-white' onClick={getMyLocation}>Pegar minha localização</button>
+      <button className='my-2 p-3 rounded bg-pink-800 font-bold shadow-xl hover:shadow block w-3/4 text-center mx-auto text-white'
+      onClick={save}>Salvar meu status</button>
     </div>
   );
 };

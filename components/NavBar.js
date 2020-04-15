@@ -10,9 +10,10 @@ const NavLink = ({href, children}) => {
 const NavBar = () => {
   return (
     <div className='bg-gray-500 py-4 text-center'>
-      <NavLink href='/sobre'> Sobre </NavLink>
-      <NavLink href='/cadastro'> Cadastro </NavLink>
-      <NavLink href='/entrar'> Entrar </NavLink>
+      <NavLink href='/'> Inicio </NavLink>
+      <NavLink href='/'> Sobre </NavLink>
+      <NavLink href='/'> Cadastro </NavLink>
+      <NavLink href='/'> Entrar </NavLink>
     </div>
   );
 };

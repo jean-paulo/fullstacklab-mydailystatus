@@ -248,27 +248,35 @@ const NavBar = () => {
       columnNumber: 5
     }
   }, __jsx(NavLink, {
-    href: "/sobre",
+    href: "/",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 13,
       columnNumber: 7
     }
-  }, " Sobre "), __jsx(NavLink, {
-    href: "/cadastro",
+  }, " Inicio "), __jsx(NavLink, {
+    href: "/",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 14,
       columnNumber: 7
     }
-  }, " Cadastro "), __jsx(NavLink, {
-    href: "/entrar",
+  }, " Sobre "), __jsx(NavLink, {
+    href: "/",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 15,
+      columnNumber: 7
+    }
+  }, " Cadastro "), __jsx(NavLink, {
+    href: "/",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 16,
       columnNumber: 7
     }
   }, " Entrar "));
